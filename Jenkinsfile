@@ -1,5 +1,12 @@
 pipeline {
   agent { docker { image 'node:6.3' } }
+  environment {
+    USER = credentials('eli9000')
+    PASS = credentials('1234abcd')
+  }
+  parameters {
+    string(name: 'Eli', defaultValue: 'Hello')
+  }
   stages {
     stage('Build') {
       steps {
@@ -19,7 +26,7 @@ pipeline {
   }
   post {
     always {
-      echo 'This always be runnin'
+      echo "This always be runnin, great job ${params.name}"
     }
     success {
       echo 'Only runs if successful... duh'
@@ -27,8 +34,8 @@ pipeline {
     failure {
       echo 'Shit done failed'
       mail to: 'eli9000@gmail.com',
-           subject: 'Failed Pipeline: ${currentBuild.fullDisplayName}',
-           body: 'Something is wrong with <insert env var>'
+           subject: "Failed Pipeline: ${env.USER}",
+           body: "Something wrong with your password: ${env.PASS}"
     }
     unstable {
       echo 'Runs only if "run" was marked as unstable'
