@@ -10,7 +10,7 @@ jobs:
     name: A job to say Howzit
     steps:
       - name: Checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
       - name: Howzit action step
         uses: ./actions/hello-action
         # Give this step an id... no need to match action name
