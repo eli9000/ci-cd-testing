@@ -9,10 +9,12 @@ jobs:
     # Job name (can be anything)
     name: A job to say Howzit
     steps:
+      - name: Checkout
+      - uses: actions/checkout@v2
       - name: Howzit action step
+        uses: ./actions/hello-action
         # Give this step an id... no need to match action name
         id: hello
-        uses: eli9000/ci-cd-testing/actions/hello-action@master
         with:
           who-to-greet: "Haxor Supreme"
       # This step prints an output (time) from prev step's action
