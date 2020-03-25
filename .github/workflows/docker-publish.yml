@@ -18,28 +18,28 @@ env:
 
 jobs:
   # Run tests
-  test:
-    runs-on: ubuntu-latest
+  # test:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run tests
-        run: docker build . --file Dockerfile
-        # run: |
-        #   if [ -f docker-compose.test.yml ]; then
-        #     docker-compose --file docker-compose.test.yml build
-        #     docker-compose --file docker-compose.test.yml run sut
-        #   else
-        #     docker build . --file Dockerfile
-        #   fi
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Run tests
+  #       run: docker build . --file Dockerfile
+  #       # run: |
+  #       #   if [ -f docker-compose.test.yml ]; then
+  #       #     docker-compose --file docker-compose.test.yml build
+  #       #     docker-compose --file docker-compose.test.yml run sut
+  #       #   else
+  #       #     docker build . --file Dockerfile
+  #       #   fi
 
   # Push image to Docker Hub
   push:
     # Ensure test job passes before pushing
-    needs: test
+    # needs: test
 
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    # if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2
@@ -47,7 +47,7 @@ jobs:
         run: docker build -t eli9000/$IMAGE_NAME:latest .
 
       - name: Log into registry
-        run: echo "${{ secrets.GH_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.DOCKER_PW }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Push image
         run: docker push eli9000/$IMAGE_NAME:latest
