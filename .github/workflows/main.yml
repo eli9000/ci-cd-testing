@@ -1,0 +1,23 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Say Hello
+
+on: [push]
+
+jobs:
+  hello-job:
+    # Job runs on Linux
+    runs-on: ubuntu-latest
+    # Job name (can be anything)
+    name: A job to say Howzit
+    steps:
+      - name: Howzit action step
+        # Give this step an id... no need to match action name
+        id: hello
+        uses: actions/hello-action@v1
+        with:
+          who-to-greet: "Haxor Supreme"
+      # This step prints an output (time) from prev step's action
+      - name: Echo greeting time
+        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
