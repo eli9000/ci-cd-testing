@@ -50,7 +50,12 @@ jobs:
         run: echo "${{ secrets.DOCKER_PW }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Push image
-        run: docker push eli9000/test-app-ci-cd:latest
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: eli9000/test-app-ci-cd
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_PW }}
+        # run: docker push eli9000/test-app-ci-cd:latest
         # run: |
         #   IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
 
