@@ -15,7 +15,7 @@ jobs:
       - name: Howzit action step
         # Give this step an id... no need to match action name
         id: hello
-        uses: actions/hello-action@v1
+        uses: eli9000/ci-cd-testing/actions/hello-action@v1
         with:
           who-to-greet: "Haxor Supreme"
       # This step prints an output (time) from prev step's action
