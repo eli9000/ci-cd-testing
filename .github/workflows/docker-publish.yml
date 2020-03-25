@@ -8,9 +8,8 @@ on:
     # Publish `v1.2.3` tags as releases
     tags:
       - v*
-
   # Run tests for any PRs
-  pull_requests:
+  # pull_requests:
 
 env:
   # Your image's name
@@ -24,13 +23,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
-        run: |
-          if [ -f docker-compose.test.yml ]; then
-            docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml run sut
-          else
-            docker build . --file Dockerfile
-          fi
+        run: docker build . --file Dockerfile
+        # run: |
+        #   if [ -f docker-compose.test.yml ]; then
+        #     docker-compose --file docker-compose.test.yml build
+        #     docker-compose --file docker-compose.test.yml run sut
+        #   else
+        #     docker build . --file Dockerfile
+        #   fi
 
   # Push image to Docker Hub
   push:
@@ -43,10 +43,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build image
-        run: docker build . --file Dockerfile --tag image
+        run: docker build -f Dockerfile --tag test-app-ci-cd .
 
       - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.GH_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Push image
         run: |
