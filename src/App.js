@@ -3,9 +3,6 @@ import dude from "./assets/me-dude.jpg";
 import walter from "./assets/me-walter.jpg";
 import "./App.css";
 
-// const dude = import("./assets/me-dude.jpg");
-// const walter = import("./assets/me-walter.jpg");
-
 function App() {
   return (
     <div className="App">

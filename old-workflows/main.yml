@@ -1,0 +1,22 @@
+name: Say Hello
+
+on: [push]
+
+jobs:
+  hello-job:
+    # Job runs on Linux
+    runs-on: ubuntu-latest
+    # Job name (can be anything)
+    name: A job to say Howzit
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Howzit action step
+        uses: ./actions/hello-action
+        # Give this step an id... no need to match action name
+        id: hello
+        with:
+          who-to-greet: "Haxor Supreme"
+      # This step prints an output (time) from prev step's action
+      - name: Echo greeting time
+        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
