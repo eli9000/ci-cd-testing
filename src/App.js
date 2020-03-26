@@ -18,7 +18,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Peep da Repo my People!
+          BLING BLING
         </a>
       </div>
     </div>
