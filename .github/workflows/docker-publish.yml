@@ -50,7 +50,7 @@ jobs:
         run: echo "${{ secrets.DOCKER_PW }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Push image
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: eli9000/test-app-ci-cd
           username: ${{ github.actor }}
